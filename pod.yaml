@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-k8s-pod
+  labels:
+    app: my-app
+spec:
+  containers:
+    - name: my-container
+      image: shashank070105/my-first-devops-app:latest
+      ports:
+        - containerPort: 5000
