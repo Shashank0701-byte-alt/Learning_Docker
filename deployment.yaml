@@ -12,8 +12,21 @@ spec:
       labels:
         app: my-app
     spec:
+      volumes:
+        - name: my-storage
+          persistentVolumeClaim:
+            claimName: my-data-claim
       containers:
         - name: my-container
-          image: shashank070105/my-first-devops-app:latest
+          image: shashank070105/my-first-devops-app:v2
           ports:
             - containerPort: 5000
+          env:
+            - name: MY_SECRET_MSG
+              valueFrom:
+                secretKeyRef:
+                  name: my-app-secrets
+                  key: SPECIAL_MESSAGE
+          volumeMounts:         
+            - mountPath: "/data"
+              name: my-storage
